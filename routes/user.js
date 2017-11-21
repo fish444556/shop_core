@@ -8,7 +8,6 @@ var User = require('../models/user');
 
 var app = express();
 var router = express.Router();
-debugger
 
 app.use(cors({
   origin: true,
@@ -16,7 +15,7 @@ app.use(cors({
 }));
 
 // api ----------------------------------------------------------------------------
-app.route('/login').post(function(req, res) {
+app.post('/login', function(req, res) {
   // use mongoose to get user in the database
   User.findOne(
   {
@@ -30,7 +29,7 @@ app.route('/login').post(function(req, res) {
 });
 
 // register user
-app.route('/register').post(function(req, res) {
+app.post('/register', function(req, res) {
   User.create({
     email: req.body.email,
     password: req.body.password,
