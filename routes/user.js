@@ -15,6 +15,19 @@ app.use(cors({
 }));
 
 // api ----------------------------------------------------------------------------
+app.post('/checklogin', function(req, res) {
+  // use mongoose to get user in the database
+  User.findOne(
+  {
+    email : req.body.email,
+  }, function(err, user) {
+    if (err)
+      res.send(err);
+    res.json(user); // return user in JSON format
+  });
+});
+
+
 app.post('/login', function(req, res) {
   // use mongoose to get user in the database
   User.findOne(
@@ -36,11 +49,10 @@ app.post('/register', function(req, res) {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     orders: null
-  }, function(err, todo) {
+  }, function(err, user) {
     if (err)
       res.send(err);
-
-    res.send('Register successfully');
+    res.json(user);
   });
 
 });
