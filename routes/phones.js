@@ -11,32 +11,32 @@ app.use(cors({
   origin: true,
   credentials: true
 }));
-debugger
+
 // api ----------------------------------------------------------------------------
 app.get('/', function(req, res) {
-  // use mongoose to get user in the database
-  Phone.find(function(err, user) {
+  // use mongoose to get phones in the database
+  Phone.find(function(err, phones) {
     if (err)
       res.send(err);
-    res.json(user); // return user in JSON format
+    res.json(phones); // return phones in JSON format
   });
 });
 
-// register user
-// app.post('/register', function(req, res) {
-//   User.create({
-//     email: req.body.email,
-//     password: req.body.password,
-//     firstName: req.body.firstName,
-//     lastName: req.body.lastName,
-//     orders: null
-//   }, function(err, todo) {
-//     if (err)
-//       res.send(err);
+// update phone when it is purchased
+app.put('/update', function(req, res) {
+  debugger
+  Phone.update({
+    name: req.body.name
+  }, {
+    $set: {
+      quantity: req.body.quantity
+    }
+  }, function(err, todo) {
+    if (err)
+      res.send(err);
+    res.send(req.body.name);
+  });
 
-//     res.send('Register successfully');
-//   });
-
-// });
+});
 
 module.exports = app;

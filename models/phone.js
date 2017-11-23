@@ -14,7 +14,9 @@ var phoneSchema = mongoose.Schema({
   images: Object,
   name: String,
   sizeAndWeight: Object,
-  storage: Object
+  storage: Object,
+  price: Number,
+  quantity: Number
 });
 
 var phoneModel = mongoose.model('phones', phoneSchema);

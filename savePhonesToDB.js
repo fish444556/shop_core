@@ -23,6 +23,13 @@ var phoneModel = require('./models/phone');
 
 mongoose.connect('mongodb://localhost:27017/mongo_todo');
 
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+}
+
 fs.readdir(__dirname + '/phones', function(err, items) {
   for (var i=0; i<items.length; i++) {
     readJSONFile(__dirname + '/phones/' + items[i], function (err, json) {
@@ -42,7 +49,9 @@ fs.readdir(__dirname + '/phones', function(err, items) {
         images: json.images,
         name: json.name,
         sizeAndWeight: json.sizeAndWeight,
-        storage: json.storage
+        storage: json.storage,
+        price: getRandomInt(50, 100),
+        quantity: getRandomInt(1, 10)
       }, (err, phone) => {
         if (err) {
           console.log(err);
